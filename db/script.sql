@@ -15,5 +15,15 @@ CREATE TABLE bruxo (
     patrono VARCHAR(100),
 );
 
+CREATE TABLE varinha (
+    id SERIAL PRIMARY KEY,
+    material VARCHAR(100) NOT NULL,
+    comprimento INT NOT NULL,
+    nucleo VARCHAR(100) NOT NULL,
+    data_criacao DATE NOT NULL,
+);
+
 -- inserindo dados
 INSERT INTO usuarios (nome, idade, casa_hogwarts, habilidade, status_sangue, patrono ) VALUES ('Harry Potter', 17, 'Grifinória', 'Apanhador', 'Mestiço', 'Cervo');
+
+INSERT INTO varinha (material, comprimento, nucleo, data_criacao) VALUES ('Madeira de Teixo', 30, 'Pena de Fênix', '1991-07-31');
