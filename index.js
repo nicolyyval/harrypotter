@@ -12,3 +12,13 @@ const pool = new Pool({
     port: 7007,
 });
 app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.send('A rota está funcionando! ✨🐍');
+  });
+  
+  
+  // Iniciar o servidor
+  app.listen(PORT, () => {
+    console.log(`🐍 Servidor rodando na porta ${PORT} 🐍`);
+  });
