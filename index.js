@@ -72,6 +72,91 @@ app.post('/varinhas', async (req, res) => {
     }
 });
 
+//Rota que deleta um bruxo
+app.delete('/bruxos/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        await pool.query('DELETE FROM bruxos WHERE id = $1', [id]);
+        res.json({ message: 'Bruxo deletado com sucesso! 🐍' });
+    } catch (error) {
+        console.error('Erro ao deletar bruxo', error);
+        res.status(500).json({ message: 'Erro ao deletar bruxo' });
+    }
+});
+
+//Rota que deleta uma varinha
+app.delete('/varinhas/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        await pool.query('DELETE FROM varinhas WHERE id = $1', [id]);
+        res.json({ message: 'Varinha deletada com sucesso! 🧙🏻‍♂️' });
+    } catch (error) {
+        console.error('Erro ao deletar varinha', error);
+        res.status(500).json({ message: 'Erro ao deletar varinha' });
+    }
+});
+
+//Rota que atualiza um bruxo
+app.put('/bruxos/:id', async (req, res) => {
+    const { id } = req.params;
+    const { nome, idade, casa_hogwarts, habilidade, status_sangue, patrono } = req.body;
+    try {
+        await pool.query(
+            'UPDATE bruxos SET nome = $1, idade = $2, casa_hogwarts = $3, habilidade = $4, status_sangue = $5, patrono = $6 WHERE id = $7',
+            [nome, idade, casa_hogwarts, habilidade, status_sangue, patrono, id]
+        );
+        res.json({ message: 'Bruxo atualizado com sucesso! 🐍' });
+    } catch (error) {
+        console.error('Erro ao atualizar bruxo', error);
+        res.status(500).json({ message: 'Erro ao atualizar bruxo' });
+    }
+});
+
+//Rota que atualiza uma varinha
+app.put('/varinhas/:id', async (req, res) => {
+    const { id } = req.params;
+    const { material, comprimento, nucleo, data_criacao } = req.body;
+    try {
+        await pool.query(
+            'UPDATE varinhas SET material = $1, comprimento = $2, nucleo = $3, data_criacao = $4 WHERE id = $5',
+            [material, comprimento, nucleo, data_criacao, id]
+        );
+        res.json({ message: 'Varinha atualizada com sucesso! 🧙🏻‍♂️' });
+    } catch (error) {
+        console.error('Erro ao atualizar varinha', error);
+        res.status(500).json({ message: 'Erro ao atualizar varinha' });
+    }
+});
+
+//Get bruxo por id
+app.get('/bruxos/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const resultado = await pool.query('SELECT * FROM bruxos WHERE id = $1', [id]);
+        res.json({
+            bruxo: resultado.rows[0],
+        });
+    } catch (error) {
+        console.error('Erro ao obter bruxo', error);
+        res.status(500).json({ message: 'Erro ao obter bruxo' });
+    }
+});
+
+
+//Get varinha por id
+app.get('/varinhas/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const resultado = await pool.query('SELECT * FROM varinhas WHERE id = $1', [id]);
+        res.json({
+            varinha: resultado.rows[0],
+        });
+    } catch (error) {
+        console.error('Erro ao obter varinha', error);
+        res.status(500).json({ message: 'Erro ao obter varinha' });
+    }
+});
+
 
 app.get('/', (req, res) => {
     res.send('A rota está funcionando! ✨🐍');
