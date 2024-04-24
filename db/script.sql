@@ -5,7 +5,7 @@ CREATE DATABASE harrypotter;
 \c harrypotter;
 
 -- crianso a tabela
-CREATE TABLE usuarios (
+CREATE TABLE bruxo (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     idade INT NOT NULL,
