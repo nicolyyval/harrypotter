@@ -27,6 +27,20 @@ app.get('/bruxos', async (req, res) => {
     }
 });
 
+
+app.get('/bruxos/:nome', async (req, res) => {
+    try {
+        const { nome } = req.params;
+        const resultado = await pool.query('SELECT * FROM bruxos WHERE nome = $1', [nome]);
+        res.json({
+            bruxo: resultado.rows[0],
+        });
+    } catch (error) {
+        console.error('Erro ao obter bruxo', error);
+        res.status(500).json({ message: 'Erro ao obter bruxo' });
+    }
+});
+
 //Rota que obtem todas as varinhas
 app.get('/varinhas', async (req, res) => {
     try {
