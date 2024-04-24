@@ -5,7 +5,7 @@ CREATE DATABASE harrypotter;
 \c harrypotter;
 
 -- crianso a tabela
-CREATE TABLE bruxo (
+CREATE TABLE bruxos (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     idade INT NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE bruxo (
     patrono VARCHAR(100),
 );
 
-CREATE TABLE varinha (
+CREATE TABLE varinhas (
     id SERIAL PRIMARY KEY,
     material VARCHAR(100) NOT NULL,
     comprimento INT NOT NULL,
@@ -24,6 +24,6 @@ CREATE TABLE varinha (
 );
 
 -- inserindo dados
-INSERT INTO usuarios (nome, idade, casa_hogwarts, habilidade, status_sangue, patrono ) VALUES ('Harry Potter', 17, 'Grifinória', 'Apanhador', 'Mestiço', 'Cervo');
+INSERT INTO bruxos (nome, idade, casa_hogwarts, habilidade, status_sangue, patrono ) VALUES ('Harry Potter', 17, 'Grifinória', 'Apanhador', 'Mestiço', 'Cervo');
 
-INSERT INTO varinha (material, comprimento, nucleo, data_criacao) VALUES ('Madeira de Teixo', 30, 'Pena de Fênix', '1991-07-31');
+INSERT INTO varinhas (material, comprimento, nucleo, data_criacao) VALUES ('Madeira de Teixo', 30, 'Pena de Fênix', '1991-07-31');

@@ -13,6 +13,49 @@ const pool = new Pool({
 });
 app.use(express.json());
 
+//Rota que obtem todos os bruxos
+app.get('/bruxos', async (req, res) => {
+    try {
+        const resultado = await pool.query('SELECT * FROM bruxos');
+        res.json({
+            total: resultado.rowCount,
+            bruxos: resultado.rows,
+        });
+    } catch (error) {
+        console.error('Erro ao obter bruxos', error);
+        res.status(500).json({ message: 'Erro ao obter os bruxos' });
+    }
+});
+
+//Rota que obtem todas as varinhas
+app.get('/varinhas', async (req, res) => {
+    try {
+        const resultado = await pool.query('SELECT * FROM varinhas');
+        res.json({
+            total: resultado.rowCount,
+            varinhas: resultado.rows,
+        });
+    } catch (error) {
+        console.error('Erro ao obter varinhas', error);
+        res.status(500).json({ message: 'Erro ao obter as varinhas' });
+    }
+});
+
+
+//Rota que insere um bruxo
+app.post('/bruxos', async (req, res) => {
+    const { nome, idade, casa_hogwarts, habilidade, status_sangue, patrono } = req.body;
+    try {
+        await pool.query(
+            'INSERT INTO bruxos (nome, idade, casa_hogwarts, habilidade, status_sangue, patrono) VALUES ($1, $2, $3, $4, $5, $6)',
+            [nome, idade, casa_hogwarts, habilidade, status_sangue, patrono]
+        );
+        res.json({ message: 'Bruxo inserido com sucesso! 🐍' });
+    } catch (error) {
+        console.error('Erro ao inserir bruxo', error);
+        res.status(500).json({ message: 'Erro ao inserir bruxo' });
+    }
+});
 
 
 app.get('/', (req, res) => {
