@@ -57,6 +57,21 @@ app.post('/bruxos', async (req, res) => {
     }
 });
 
+//Rota que insere uma varinha
+app.post('/varinhas', async (req, res) => {
+    const { material, comprimento, nucleo, data_criacao } = req.body;
+    try {
+        await pool.query(
+            'INSERT INTO varinhas (material, comprimento, nucleo, data_criacao) VALUES ($1, $2, $3, $4)',
+            [material, comprimento, nucleo, data_criacao]
+        );
+        res.json({ message: 'Varinha inserida com sucesso! 🧙🏻‍♂️' });
+    } catch (error) {
+        console.error('Erro ao inserir varinha', error);
+        res.status(500).json({ message: 'Erro ao inserir varinha' });
+    }
+});
+
 
 app.get('/', (req, res) => {
     res.send('A rota está funcionando! ✨🐍');
