@@ -13,6 +13,8 @@ const pool = new Pool({
 });
 app.use(express.json());
 
+
+
 app.get('/', (req, res) => {
     res.send('A rota está funcionando! ✨🐍');
   });
